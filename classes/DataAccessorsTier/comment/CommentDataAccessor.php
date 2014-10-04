@@ -96,7 +96,6 @@
       
     public function getComment($selectResult) {
         $comment = new Comment();
-        $count = 0;
         while($list = mysqli_fetch_assoc($selectResult)){
             $comment->setId($list['com_comment_id']);
             $comment->setText($list['com_text']);
