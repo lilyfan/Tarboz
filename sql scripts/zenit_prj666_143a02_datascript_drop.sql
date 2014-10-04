@@ -19,3 +19,4 @@ DROP TABLE `prj666`.`tbl_sublangbridge`;
 DROP TABLE `prj666`.`tbl_subscription`;
 DROP TABLE `prj666`.`tbl_user`;
 DROP TABLE `prj666`.`tbl_user_type`;
+DROP TABLE `prj666`.`tbl_password_reset`;

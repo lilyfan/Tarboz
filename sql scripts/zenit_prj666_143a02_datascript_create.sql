@@ -184,3 +184,9 @@ CREATE TABLE `prj666`.`tbl_source` (
  `sou_source_form` VARCHAR(255) NULL,
  `sou_source_time` VARCHAR(255) NULL
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE `prj666`.`tbl_password_reset` (
+  `ps_pwreset_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `ps_pwreset_user_id` VARCHAR(20) NOT NULL,
+  `ps_pwreset_date` DATE NOT NULL
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
