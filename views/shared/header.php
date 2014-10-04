@@ -10,7 +10,7 @@
 
 
 
-require_once BUSINESS_DIR_USER. '/User.php';
+require_once BUSINESS_DIR_USER. 'User.php';
 
 session_start();
 
