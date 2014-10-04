@@ -1,3 +1,35 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- 
 <html>
 <head>
@@ -30,7 +62,9 @@
 
       <div class="header_row">
 -->
-<script type="text/javascript" src="/plug-in/virtual_keyboard/keyboard.js" charset="UTF-8"></script>
+
+<script type="text/javascript" src="plug-in/virtual_keyboard/keyboard.js" charset="UTF-8"></script>
+
 <div id="wrapper">
 <div id="search">
   <form>
