@@ -22,9 +22,9 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
 <html>
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="/Tarboz/packages/virtual_keyboard/keyboard.css">
+  <link rel="stylesheet" type="text/css" href="plug-in/virtual_keyboard/keyboard.css">
   <link rel="stylesheet" type="text/css" href="style/css/style.css"/>
-  <link rel="shortcut icon" href="../../images/watermelon8.png"/>
+  <link rel="shortcut icon" href="images/watermelon8.png"/>
    
    <!-- Extra libraries -->
    <script src ="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -71,13 +71,12 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
         },
         function(data,status){
             
-          if(data==1){
+          if(data==1){ 
             document.getElementById("ftest").innerHTML="<?php echo LOGIN_SUCCESS; ?>";
             document.getElementById("forgotpwd").innerHTML="";
 
             //When username and password is right it will change the text to Logout
             document.getElementById("call_it").innerHTML="Logout";
-
             //When Successful it will print the user's name beside the logout
             document.getElementById("user_name").innerHTML="<?php if($user) echo $user->getFirstName(); ?>";
             //When logged in successful, it will close the window
@@ -103,7 +102,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
 
     <div id="header">
       <div class="header_row">
-        <div id="logo"><a href=""><img src="../../images/logo.png" height="50"></a></div>
+        <div id="logo"><a href=""><img src="images/logo.png" height="50"></a></div>
         <nav id="navigation">
           <a href="/Tarboz/Views/Home/Index.php">Home</a> 
           <a href="/Tarboz/Views/Home/Result.php">Result</a> 

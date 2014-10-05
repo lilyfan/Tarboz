@@ -13,6 +13,7 @@
       $rating_id = $comment->getRatingId();
       $created_by = $comment->getCreatedBy();
 
+      $query_insert="INSERT INTO COMMENT VALUES ('', $text, $rating_id, $created_by)";
       $query_insert="INSERT INTO ".COMMENT." VALUES ('', ".$text.", ".$rating_id.", ".$created_by.")";
 
       $dbHelper = new DBHelper();
