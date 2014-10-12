@@ -1,18 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php
   require_once("config.php");
   // echo "dirname  DOCUMENT_ROOT: " . dirname($_SERVER['DOCUMENT_ROOT']) . "<br>"; 
@@ -29,10 +14,6 @@ require_once BUSINESS_DIR_USER. 'User.php';
 
 session_start();
 
-$user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
-
-//echo $user->getFirstName();
-//echo $_SESSION['user']->getFirstName();
 ?>
 <html>
 <head>
@@ -51,60 +32,64 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
       
       $(document).ready(function(){
            document.getElementById("forgotpwd").innerHTML="<a href='#'>Forgot Password</a>";
-        $("#forgotdiv").hide();
-      //var log_div =document.getElementById("call_it").innerHTML;
+           $("#forgotdiv").hide();
+           //var log_div =document.getElementById("call_it").innerHTML;
 
-      $( "#login" ).dialog({ autoOpen: false });
-      $( "#call_it" ).click(function() {
-        if(document.getElementById("call_it").innerHTML=="Login"){
-          $( "#login" ).dialog( "open" );
-            
-        }
-        else{
-          document.getElementById("call_it").innerHTML="Login";
-          document.getElementById("user_name").innerHTML="";
-          <?php session_destroy(); $user=""; ?>
-        }
+           $( "#login" ).dialog({ autoOpen: false });
+           $( "#call_it" ).click(function() {
+             if(document.getElementById("call_it").innerHTML=="Login"){
+               $( "#login" ).dialog( "open" );
+                
+             }
+             else{
+               document.getElementById("call_it").innerHTML="Login";
+               document.getElementById("user_name").innerHTML="";
+               <?php session_destroy(); $user=""; ?>
+             }
 
-      });
+           });
 
-      $("#forgotpwd").click(function(){
-         $("#forgotdiv").show();
-         $("#login_form").hide();
+           $("#forgotpwd").click(function(){
+              $("#forgotdiv").show();
+              $("#login_form").hide();
 
-      });
+           });
 
         
-       $("#sub").click(function(){
-        //To keep count of the number of times, requested
-         
-        $.post("user_test/login.php",
-        {   
-          userid: $("#userlogin").val(),
-          password: $("#userpassword").val(),
-          
-        },
-        function(data,status){
-            
-          if(data==1){ 
-            document.getElementById("ftest").innerHTML="<?php echo LOGIN_SUCCESS; ?>";
-            document.getElementById("forgotpwd").innerHTML="";
+           $("#login_form").submit(function(event){
+              var formdata = $("#login_form").serialize();
+            //To keep count of the number of times, requested
+            $.ajax({
+                url: 'user_test/login.php', 
+                type: "POST",
+                data: formdata,
+                success: 
+                function(data, status) {  
+                  //alert(data);
+                  if(data != 0){ 
+                    document.getElementById("ftest").innerHTML="<?php echo LOGIN_SUCCESS; ?>";
+                    document.getElementById("forgotpwd").innerHTML="";
 
-            //When username and password is right it will change the text to Logout
-            document.getElementById("call_it").innerHTML="Logout";
-            //When Successful it will print the user's name beside the logout
-            document.getElementById("user_name").innerHTML="<?php if($user) echo $user->getFirstName(); ?>";
-            //When logged in successful, it will close the window
-            $( "#login" ).dialog( "close" );
+                    //When username and password is right it will change the text to Logout
+                    document.getElementById("call_it").innerHTML="Logout";
+                    //When Successful it will print the user's name beside the logout
+                    //document.getElementById("user_name").innerHTML= "<?php if(isset($_SESSION['userid'])) print 'user: '.$_SESSION['userid']; ?>";
+                    document.getElementById("user_name").innerHTML=data;
+                    //When logged in successful, it will close the window
+                    $( "#login" ).dialog( "close" );
 
-            }
-            else {
-              document.getElementById("ftest").innerHTML="<?php echo LOGIN_FAIL; ?>";
-            } 
-        });
+                    }
+                    else {
+                      document.getElementById("ftest").innerHTML="<?php echo LOGIN_FAIL; ?>";
+                    }
+                },
+                error: function() {
+                  alter("ajax error");
+                }
+              });//end $.ajax
+              event.preventDefault();
+          }); // end $("#login_form").submitsubmit
 
-      });
-  
       });
 
   </script>
@@ -128,13 +113,13 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
           <a href="#" id="user_name"></a> 
         </nav>
         <div style="width:100px;" title="Login Window" id="login">
-          <div id="login_form">
-            Login:     <input type="text" id="userlogin"><br>
-            Password:  <input type="text" id="userpassword"><br>
-            <button id="sub">Login</button>
-            <p id="ftest"></p>
-            <p id="forgotpwd"></p>
-        </div>
+          <form name="login_form "id="login_form" method="POST">
+            Login:     <input type="text" id="userid" name="userid"><br>
+            Password:  <input type="text" id="password" name="password"><br>
+            <input type="submit" id="sub" value="Login">
+          </form>
+          <p id="ftest"></p>
+          <p id="forgotpwd"></p>
           <!---forgot password window-->
           <div id="forgotdiv">
 

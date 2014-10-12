@@ -32,7 +32,7 @@
     public function getAllComments(){
       $commentDataAccessor = new CommentDataAccessor();
       $result = $commentDataAccessor->getAllComments();
-      $return $result;
+      return $result;
     }
 
     public function getCommentById($id) {

@@ -2,7 +2,7 @@
   
   require_once DB_CONNECTION . 'DBHelper.php';
   require_once BUSINESS_DIR_COMMENT . 'Comment.php';
-  require_once(DB_CONNECTION . 'datainfo.php');
+  require_once DB_CONNECTION . 'datainfo.php';
 
   class CommentDataAccessor {
 
@@ -13,7 +13,6 @@
       $rating_id = $comment->getRatingId();
       $created_by = $comment->getCreatedBy();
 
-      $query_insert="INSERT INTO COMMENT VALUES ('', $text, $rating_id, $created_by)";
       $query_insert="INSERT INTO ".COMMENT." VALUES ('', ".$text.", ".$rating_id.", ".$created_by.")";
 
       $dbHelper = new DBHelper();
@@ -60,7 +59,8 @@
     }
       
     public function getAllComments() {
-      $query_select_all = "SELECT * FROM ".COMMENT;
+      $query = "SELECT * FROM ".COMMENT;
+      //print("CommentDataAccessor->getAllComments->$query ");
       $dbHelper = new DBHelper();
       $result = $dbHelper->executeQuery($query);
       $comment_all = $this->getCommentList($result);

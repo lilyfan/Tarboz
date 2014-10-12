@@ -32,13 +32,13 @@
 
       }
       
-    if($loggeduser->getFirstName()!=null){
+    /*if(!empty($loggeduser->getFirstName() ) ) {
 
         session_start();
 
-        $_SESSION["user"] = $loggeduser;
+        $_SESSION['user'] = $loggeduser;
         
-      }
+      }*/
         
       //returns the last inserted row.
       return $loggeduser;
