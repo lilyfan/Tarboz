@@ -36,12 +36,18 @@ class DBHelper {
       mysqli_close($this->connection);
     }
   }
-
+  /**
+   * 
+   * @param string $sql
+   * @return mysql_result $result
+   */
   public function executeSelect($sql) {
+    //3
     $this->connectToDB();
-    $result = mysqli_query($this->connection, $sql);
+    $result = mysqli_query($this->connection, $sql); // 1    
     $this->closeConnection();
-    return $result;
+    // 5
+    return $result; // 1
   }
 
   public function executeQuery($sql) {
@@ -50,6 +56,7 @@ class DBHelper {
       $result = mysqli_query($this->connection, $sql);
     }
     $this->closeConnection();
+    // 4
     return $result;
   }
 

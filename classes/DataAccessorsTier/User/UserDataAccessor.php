@@ -78,12 +78,13 @@ class UserDataAccessor {
     $pwd = $user->getPassword();
     $email = $user->getEmail();
 
-    $query = "UPDATE USER SET
-      usr_password        = '$pwd',
-      WHERE usr_user_id = '$uid'";
+    $query = "UPDATE " .USER. " SET
+      usr_password    = '".$pwd."'
+      WHERE usr_user_id = '".$uid."'";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeQuery($query);
+
     return $result;
   }
 
@@ -95,13 +96,28 @@ class UserDataAccessor {
     return $result;
   }
 
+
   //for search
-  public function getUserByLoginId($loginid) {
-    $query = "SELECT * FROM " . USER . "  WHERE usr_login = " . ' " $loginid " ';
+  public function getUserByEmail($emailaddress) {
+    $query = "SELECT * FROM " . USER . " WHERE usr_email = " . " '".$emailaddress."' ";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
     $user = $this->getUser($result);
+    return $user;
+  }
+
+  //for search
+  public function getUserByLoginId($loginid) {
+
+    $query = "SELECT * FROM " . USER . " WHERE usr_login = " . " '".$loginid."' ";
+
+    $dbHelper = new DBHelper();
+
+    $result = $dbHelper->executeSelect($query);
+
+    $user = $this->getUser($result);
+
     return $user;
   }
 
@@ -124,7 +140,10 @@ class UserDataAccessor {
       $User->setUserType($list['usr_user_type_id']);
       $User->setUserLanguage($list['usr_language']);
       $User->setEmailSub($list['usr_email_subscribed']);
+
     } // while
+
+
     return $User;
   }
 
@@ -140,7 +159,7 @@ class UserDataAccessor {
 
   private function getUserList($selectResult) {
     //Counter that keeps count of the users
-    $Users[] = new User();
+    //$Users[] = new User();
     $count = 0;
     while ($list = mysqli_fetch_assoc($selectResult)) {
       $Users[] = new User();
@@ -212,6 +231,15 @@ class UserDataAccessor {
     return $Users;
   }
 
+  public function getUserByUserId($userId) {
+    // returns returns all users with the names passed
+    $query = "SELECT * FROM " . USER . "   WHERE usr_user_id = '$userId' ";
+
+    $dbHelper = new DBHelper();
+    $result = $dbHelper->executeSelect($query);
+    $Users = $this->getUserList($result);
+    return $Users;
+  }
 }
 
 ?>

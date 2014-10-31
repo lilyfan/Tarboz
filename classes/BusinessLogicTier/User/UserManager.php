@@ -46,6 +46,15 @@ class UserManager {
     return $users;
   }
 
+
+  //for searching the user table by email address
+  public function getUserByEmail($emailaddress) {
+    $userDataAccessor = new UserDataAccessor();
+    $user = $userDataAccessor->getUserByEmail($emailaddress);
+
+    return $user;
+  }
+
   //for searching, if searched by userid
   public function getUserByLoginId($userlogin) {
     $userDataAccessor = new UserDataAccessor();
@@ -62,6 +71,12 @@ class UserManager {
   public function getUserByTypeId($usertypeid) {
     $userDataAccessor = new UserDataAccessor();
     $users = $userDataAccessor->getUserByTypeId($usertypeid);
+    return $users;
+  }
+
+  public function getUserByUserId($userid) {
+    $userDataAccessor = new UserDataAccessor();
+    $users = $userDataAccessor->getUserByUserId($userid);
     return $users;
   }
 
